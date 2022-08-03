@@ -1,0 +1,1 @@
+"..\Hardware\LED\led.c" OPTIMIZE (8,SPEED) BROWSE INCDIR(..\Fwlib;..\User;..\RTOS;..\Hardware\LED) DEBUG OBJECTEXTEND PRINT(.\Listings\led.lst) OBJECT(..\Obj\led.obj)

@@ -1,0 +1,9 @@
+"..\Obj\delay.obj",
+"..\Obj\GPIO.obj",
+"..\Obj\main.obj",
+"..\Obj\Conf_tny.obj",
+"..\RTOS\RTX51TNY.LIB",
+"..\Obj\led.obj" 
+TO "..\Obj\RTOS" Rtx51Tiny 
+PRINT(".\Listings\RTOS.m51") RAMSIZE(256) 
+DISABLEWARNING (16) 

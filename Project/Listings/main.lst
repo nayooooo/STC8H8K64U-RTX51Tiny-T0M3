@@ -1,0 +1,79 @@
+C51 COMPILER V9.54   MAIN                                                                  08/03/2022 19:30:45 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN ..\Obj\main.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE ..\User\main.c OPTIMIZE(8,SPEED) BROWSE INCDIR(..\Fwlib;..\User;..\RTOS;
+                    -..\Hardware\LED) DEBUG OBJECTEXTEND PRINT(.\Listings\main.lst) OBJECT(..\Obj\main.obj)
+
+line level    source
+
+   1          #include "RTX51TNY.h"
+   2          
+   3          #include "main.h"
+   4          
+   5          /*******************************************************************************
+   6          * 函 数 名       : main_task
+   7          * 函数功能               : 任务0
+   8          * 输    入       : 无
+   9          * 输    出       : 无
+  10          *******************************************************************************/
+  11          void Main_Task(void) _task_ MAIN_TASK
+  12          {
+  13   1              EA_CLS;
+  14   1              
+  15   1              CreatTask:
+  16   1              if(os_create_task(LED_FLASH_TASK))
+  17   1              {
+  18   2                      goto CreatTask;
+  19   2              }
+  20   1              DeleteTask:
+  21   1              if(os_delete_task(MAIN_TASK))
+  22   1              {
+  23   2                      goto DeleteTask;
+  24   2              }
+  25   1              
+  26   1              EA_OPN;
+  27   1              
+  28   1              while(1)
+  29   1              {
+  30   2                      ;
+  31   2              }
+  32   1      }
+  33          
+  34          /*******************************************************************************
+  35          * 函 数 名       : LED_Flash
+  36          * 函数功能               : 任务1
+  37          * 输    入       : 无
+  38          * 输    出       : 无
+  39          *******************************************************************************/
+  40          void LED_Flash(void) _task_ LED_FLASH_TASK
+  41          {
+  42   1              u8 i = 0;  // 实测最长延时时间约为255个时间片
+  43   1                                 // 应该是使用了8位长度的变量，所以能修改
+  44   1              LED_Init();
+  45   1              
+  46   1              while(1)
+  47   1              {
+  48   2                      os_wait(K_IVL, i, 0);
+  49   2                      
+  50   2                      LED(0) = !LED(0);
+  51   2                      i++;
+  52   2              }
+  53   1      }
+
+C51 COMPILER V9.54   MAIN                                                                  08/03/2022 19:30:45 PAGE 2   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     44    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
